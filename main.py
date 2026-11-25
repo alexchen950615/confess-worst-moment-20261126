@@ -17,6 +17,10 @@ OUTPUT_DIR = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
 
 
 def main() -> None:
+    # Gate: entry must be a single line of 1-200 chars.
+    assert 1 <= len(ENTRY) <= 200, f"entry length {len(ENTRY)} out of range"
+    assert "\n" not in ENTRY, "entry must be a single line"
+    assert ENTRY.strip(), "entry must not be only whitespace"
     output_path = Path(OUTPUT_DIR) / "entry.txt"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(ENTRY + "\n", encoding="utf-8")
